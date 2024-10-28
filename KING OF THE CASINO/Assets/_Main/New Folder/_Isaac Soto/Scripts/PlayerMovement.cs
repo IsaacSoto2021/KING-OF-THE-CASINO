@@ -63,70 +63,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-        MyInput();
-        SpeedControl();
-        ChangeWeapon();
-
-        if (grounded) rb.drag = groundDrag;
-        else rb.drag = 0;
+      
 
     }
 
-    /// <summary>
-    /// Function for dev testing weapon swapping
-    /// </summary>
-    public void ChangeWeapon()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SwapWeapon(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SwapWeapon(2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SwapWeapon(3);
-        }
-    }
+  
 
-    /// <summary>
-    /// BTS code to let the dev swaap weapons for testing purposes
-    /// </summary>
-    /// <param name="weaponNum"></param>
-    private void SwapWeapon(int weaponNum)
-    {
-        if (weaponNum != currentWeapon)
-        {
-            if (weaponNum == 1)
-            {
-                PistolRef.SetActive(true);
-                RifleRef.SetActive(false);
-                UzoRef.SetActive(false);
-            }
-            if (weaponNum == 2)
-            {
-                PistolRef.SetActive(false);
-                RifleRef.SetActive(true);
-                UzoRef.SetActive(false);
-            }
-            if (weaponNum == 3)
-            {
-                PistolRef.SetActive(false);
-                RifleRef.SetActive(false);
-                UzoRef.SetActive(true);
-            }
-            currentWeapon = weaponNum;
-        }
-    }
+ 
+   
 
-    public void ZombieKill()
-    {
-        money += 500;
-    }
 
     private void FixedUpdate()
     {
@@ -196,88 +141,7 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
     }
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-        //When the player collides with door, it will check and take payment
-        if (collision.gameObject.tag == "Door")
-        {
-            if ( money >= collision.gameObject.GetComponent<Doors>().Payment)
-            {
-                collision.gameObject.SetActive(false);
-                money -= collision.gameObject.GetComponent<Doors>().Payment;
-                Debug.Log("Door Paid");
-            }
-        }
-
-        //When the player gets hit, they will have a half second cooldown before they can be hit again
-        if (collision.gameObject.tag == "Subject" && !recentlyDamaged)
-        {
-            health -= 5;
-            if (health <= 0) SceneManager.LoadScene(3);
-            DamageInvulnerability();
-        }
-
-        //Seperaate endgame teleporter version of the door above
-        if (collision.gameObject.tag == "Door2")
-        {
-            if (money >= 10000)
-            {
-                collision.gameObject.SetActive(false);
-                money -= 10000;
-            }
-        }
-    }
     
-    private void OnTriggerEnter(Collider other)
-    {
-        //Checks and takes payment in exhange for a substantial boost in health
-        if (other.gameObject.tag == "StrengthRum" && money >= 1500)
-        {
-            money -= 1500;
-            maxHealth = 200;
-            health = maxHealth;
-            other.gameObject.SetActive(false);
-        }
-
-        //Checks and takes payment in exhange for a small boost in Fire Rate
-        if (other.gameObject.tag == "FastNine" && money >= 1500)
-        {
-            money -= 1500;
-            PistolRef.GetComponent<GunHandling>().fireRate += 4;
-            RifleRef.GetComponent<GunHandling>().fireRate += 4;
-            UzoRef.GetComponent<GunHandling>().fireRate += 4;
-            other.gameObject.SetActive(false);
-        }
-
-        //Checks and takes payment in exhange for a small boost in damage
-        if (other.gameObject.tag == "Concussion" && money >= 1500)
-        {
-            money -= 1500;
-            PistolRef.GetComponent<GunHandling>().damage += 2;
-            RifleRef.GetComponent<GunHandling>().damage += 2;
-            UzoRef.GetComponent<GunHandling>().damage += 2;
-            other.gameObject.SetActive(false);
-        }
-
-        //Loads the Portal Home Scene
-        
-        if (other.gameObject.tag == "PortalHome")
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            SceneManager.LoadScene(0);
-           
-        }
-
-        //Loads the Portal Menu Scene
-        if (other.gameObject.tag == "PortalMenu")
-        {
-            SceneManager.LoadScene(2);
-            this.transform.position = new Vector3(340, 10, -4);
-        }
-    }
-    */
     /// <summary>
     /// Prevents Player from dieing in seconds to continuous hits every frame
     /// </summary>

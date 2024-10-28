@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * Isaac Soto 
+ * 10/24/24
+ * [ Power-up script that randomizes power-ups given to the player on pick-up]
+ */
 
 public class Power_Ups : MonoBehaviour
 {
-    public float Coin = 10f;
 
     // Start is called before the first frame update
     public void Start()
@@ -15,15 +19,29 @@ public class Power_Ups : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-
+      
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("You have collected this power-up");
-            Destroy(gameObject);
+            int Value = Random.Range(0, 3);
+            if (Value == 0)
+            {
+                
+                Debug.Log("PowerUp1");
+            }
+            else if (Value == 1)
+            {
+                Debug.Log("PowerUp2");
+
+
+            }
+            else if (Value == 2)
+            {
+                Debug.Log("PowerUp3");
+            }
         }
 
     }
