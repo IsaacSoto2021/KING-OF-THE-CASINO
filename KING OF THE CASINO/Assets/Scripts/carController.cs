@@ -20,7 +20,7 @@ public class carController : MonoBehaviour
     public float currentTurnAngle = 15f;
 
     //Random Control
-    private bool mouseControl = false;
+    private bool mouseControl = true;
     public float minSwitchTime = 5f;
     public float maxSwitchTime = 10f;
     public float switchTime;
@@ -33,7 +33,7 @@ public class carController : MonoBehaviour
 
     private void Start()
     {
-        setRandomTime();
+        //setRandomTime();
     }
 
     private void FixedUpdate()
@@ -63,14 +63,14 @@ public class carController : MonoBehaviour
             keyboardButtons();
         }
 
-        //if the timer runs out, it will switch keybinds
+        /*//if the timer runs out, it will switch keybinds
         switchTime -= Time.deltaTime;
         if (switchTime <=0)
         {
             print("Switcharoo!");
             mouseControl = !mouseControl;
             setRandomTime();
-        }
+        }*/
 
         //apply acceleration to front wheels
         frontRight.motorTorque = currentAcceleration;
@@ -134,8 +134,8 @@ public class carController : MonoBehaviour
     }
 
     //Switch between countdown from 5 to 10 seconds.
-    private void setRandomTime()
+    /*private void setRandomTime()
     {
         switchTime = Random.Range(minSwitchTime, maxTurnAngle);
-    }
+    }*/
 }
