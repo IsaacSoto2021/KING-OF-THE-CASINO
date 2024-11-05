@@ -4448,6 +4448,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c7051353c0e4f0e4d92add9b4458dc0d, type: 2}
+    - target: {fileID: 7409999471419161421, guid: 55adbc7aa060d3e4ea278b0948c6c874,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7372,6 +7377,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMachine (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1714548964506147479, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4590251029160104757, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9734,6 +9744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlotMachine (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714548964506147479, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4590251029160104757, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
         type: 3}
@@ -12109,6 +12124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlotMachine (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714548964506147479, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4590251029160104757, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
         type: 3}
@@ -14957,6 +14977,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMachine (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1714548964506147479, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4590251029160104757, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16803,6 +16828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlotMachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714548964506147479, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4590251029160104757, guid: 2a86a9fb8c6c61a4f93dcd08bccf842c,
         type: 3}
