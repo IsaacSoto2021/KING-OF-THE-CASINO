@@ -1,23 +1,25 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 
 public class TestEnemyController : MonoBehaviour
 {
-    public Transform Player;
+    public Transform player;
     private NavMeshAgent agent;
 
-    // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent <NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+      
     }
 
-    // Update is called once per frame
     void Update()
     {
-        agent.destination = Player.position;
+        agent.destination = player.position;
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -35,6 +37,7 @@ public class TestEnemyController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
+   
 }
 
 

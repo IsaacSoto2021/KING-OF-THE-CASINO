@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5690280610409200682}
   - component: {fileID: 5919192818720176054}
   - component: {fileID: 1575666426957348921}
-  - component: {fileID: 2596255278669952282}
   m_Layer: 0
   m_Name: Power_Up
   m_TagString: Untagged
@@ -111,19 +110,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2596255278669952282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 9134636760700746542, guid: b321c19b6f3b63d4f84dbc7a720f2c33,
-    type: 3}
-  m_PrefabInstance: {fileID: 7340829398538782075}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2546881987651889189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c481abeb1e4f4a9c7aba375cf439f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3031532901998082584
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +210,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
