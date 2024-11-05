@@ -10,14 +10,14 @@ public class carController : MonoBehaviour
     [SerializeField] WheelCollider backLeft;
 
     //Car Controller
-    public float acceleration = 700f;
-    public float reverseAcceleration = -700f;
+    public float acceleration = 1000f;
+    public float reverseAcceleration = -1000f;
     public AudioSource carBreakSFX;
 
-    public float breakingForce = 300f;
+    public float breakingForce = 1000f;
     public float maxTurnAngle = 15f;
 
-    private float currentAcceleration = 700f;
+    private float currentAcceleration = 1000f;
     public float currentTurnAngle = 15f;
 
     //Random Control
@@ -27,7 +27,7 @@ public class carController : MonoBehaviour
     public float switchTime;
 
     //Flip Car
-    public float flipDetect = 0.5f;
+    public float flipDetect = 1f;
     public float flipSpeed = 1f;
     public float flipDelay = 2f;
     private bool isFlipping = false;
