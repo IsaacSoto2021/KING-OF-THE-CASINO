@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.AI;
 using System.Collections.Generic;
 using UnityEngine;
 /*
@@ -9,6 +10,7 @@ using UnityEngine;
 
 public class Power_Ups : MonoBehaviour
 {
+    public Freeze freezeScript;
 
     // Start is called before the first frame update
     public void Start()
@@ -19,7 +21,7 @@ public class Power_Ups : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-      
+
     }
 
     public void OnTriggerEnter(Collider other)
@@ -34,16 +36,36 @@ public class Power_Ups : MonoBehaviour
             }
             else if (Value == 1)
             {
-                Debug.Log("PowerUp2");
+                if (freezeScript != null) // Check if testScript is assigned
+                {
+                    freezeScript.Freezing();
+                    Debug.Log("All agents frozen for 5 seconds.");
+                }
+                Debug.Log("PowerUp1");
 
 
             }
             else if (Value == 2)
             {
-                Debug.Log("PowerUp3");
+              
             }
+
+            Destroy(gameObject);
         }
 
+      
     }
 
+   
+
+
 }
+   
+    
+
+
+
+
+
+
+
