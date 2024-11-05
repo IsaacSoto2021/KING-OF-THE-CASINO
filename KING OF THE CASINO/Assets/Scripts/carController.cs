@@ -12,6 +12,7 @@ public class carController : MonoBehaviour
     //Car Controller
     public float acceleration = 700f;
     public float reverseAcceleration = -700f;
+    public AudioSource carBreakSFX;
 
     public float breakingForce = 300f;
     public float maxTurnAngle = 15f;
@@ -52,7 +53,7 @@ public class carController : MonoBehaviour
 
 
             //If mouse control is true, the player will use the mouse, else they use the keyboard
-            if (mouseControl)
+        if (mouseControl)
         {
             print("Mouse Time!");
             mouseButtons();
@@ -67,6 +68,7 @@ public class carController : MonoBehaviour
         switchTime -= Time.deltaTime;
         if (switchTime <=0)
         {
+            carBreakSFX.Play();
             print("Switcharoo!");
             mouseControl = !mouseControl;
             setRandomTime();
