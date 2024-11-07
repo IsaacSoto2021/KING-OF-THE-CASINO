@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4407,7 +4407,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 749896112831204771, guid: 11a5c7fd2d82d774795a3cffa3e99098,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1435124295}
   m_SourcePrefab: {fileID: 100100000, guid: 11a5c7fd2d82d774795a3cffa3e99098, type: 3}
 --- !u!1001 &546200759
 PrefabInstance:
@@ -4748,7 +4752,12 @@ PrefabInstance:
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
       propertyPath: flipSpeed
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
+        type: 3}
+      propertyPath: flipDetect
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
@@ -4763,7 +4772,7 @@ PrefabInstance:
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
       propertyPath: maxTurnAngle
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
@@ -4773,12 +4782,12 @@ PrefabInstance:
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
       propertyPath: currentTurnAngle
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
       propertyPath: reverseAcceleration
-      value: -1000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4793491060966537110, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
@@ -11928,6 +11937,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1434752810}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1435124287 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 749896112831204771, guid: 11a5c7fd2d82d774795a3cffa3e99098,
+    type: 3}
+  m_PrefabInstance: {fileID: 524293303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1435124295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435124287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1001 &1436196853
 PrefabInstance:
   m_ObjectHideFlags: 0

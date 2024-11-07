@@ -93,7 +93,7 @@ public class carController : MonoBehaviour
     }
 
 
-        private void Start()
+    private void Start()
     {
         setRandomTime();
     }
@@ -103,7 +103,7 @@ public class carController : MonoBehaviour
         //reverse accelerate 
         if ( Input.GetAxisRaw("Vertical") > 0)
         {
-            if (hazardEffect = false)
+            if (hazardEffect == false)
             {
                 print("Go Forward");
                 currentAcceleration = acceleration;
@@ -114,7 +114,7 @@ public class carController : MonoBehaviour
             }
 
         }
-        else if (Input.GetAxisRaw("Vertical") < 0)
+        if (Input.GetAxisRaw("Vertical") < 0)
         {
             print("Go Backward");
             currentAcceleration = reverseAcceleration;
