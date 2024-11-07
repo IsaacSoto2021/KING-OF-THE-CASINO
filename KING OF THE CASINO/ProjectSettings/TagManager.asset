@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Death
   - Enemy
+  - Hazard
+  - EnemySpawn
+  - Breakable
   layers:
   - Default
   - TransparentFX

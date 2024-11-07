@@ -43,7 +43,7 @@ public class Breakables : MonoBehaviour
             Debug.Log("You lose 6000 points");
           }
 
-          Destroy(gameObject);
+          Destroy(other.gameObject);
 
 
 

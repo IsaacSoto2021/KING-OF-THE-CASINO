@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class carController : MonoBehaviour
 {
@@ -31,6 +32,51 @@ public class carController : MonoBehaviour
     public float flipSpeed = 1f;
     public float flipDelay = 2f;
     private bool isFlipping = false;
+
+    //Score Count
+    public int money = 10000;
+
+    //Collision Handler, all collision based interactions will be handled here
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Breakable"))
+        {
+            int Value = Random.Range(0, 5);
+            if (Value == 0)
+            {
+                money -= 1000;
+                Debug.Log("You lose 1000 points");
+            }
+            else if (Value == 1)
+            {
+                money -= 2000;
+                Debug.Log("You lose 2000 points");
+            }
+            else if (Value == 2)
+            {
+                money -= 3000;
+                Debug.Log("You lose 3000 points");
+
+            }
+            else if (Value == 3)
+            {
+                money -= 4000;
+                Debug.Log("You lose 4000 points");
+            }
+            else if (Value == 4)
+            {
+                money -= 5000;
+                Debug.Log("You lose 5000 points");
+            }
+            else if (Value == 5)
+            {
+                money -= 6000;
+                Debug.Log("You lose 6000 points");
+            }
+
+            Destroy(collision.gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -84,6 +130,11 @@ public class carController : MonoBehaviour
 
         detectUpsideDown();
 
+        //Loads win screen when player accomplishes objective
+        if (money <= 0)
+        {
+            SceneManager.LoadScene(4);
+        }
     }
 
     private void keyboardButtons()
