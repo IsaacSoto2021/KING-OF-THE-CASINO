@@ -33,12 +33,18 @@ public class carController : MonoBehaviour
     public float flipDelay = 2f;
     private bool isFlipping = false;
 
+    //Variables for Hazard effects
+    public float hazardSpeed = 200f;
+    public bool hazardEffect = false;
+
+
     //Score Count
     public int money = 10000;
 
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
     {
+        // Breakable collisions and randomized value chance for each collision
         if (collision.gameObject.CompareTag("Breakable"))
         {
             int Value = Random.Range(0, 5);
@@ -76,9 +82,18 @@ public class carController : MonoBehaviour
 
             Destroy(collision.gameObject);
         }
+
+        //Hazard collision
+        if (collision.gameObject.tag == "Hazard")
+        {
+            collision.gameObject.SetActive(false);
+            StartCoroutine(HazardSlow());
+
+        }
     }
 
-    private void Start()
+
+        private void Start()
     {
         setRandomTime();
     }
@@ -88,8 +103,16 @@ public class carController : MonoBehaviour
         //reverse accelerate 
         if ( Input.GetAxisRaw("Vertical") > 0)
         {
-            print("Go Forward");
-            currentAcceleration = acceleration;
+            if (hazardEffect = false)
+            {
+                print("Go Forward");
+                currentAcceleration = acceleration;
+            }
+            else
+            {
+                currentAcceleration = hazardSpeed;
+            }
+
         }
         else if (Input.GetAxisRaw("Vertical") < 0)
         {
@@ -191,4 +214,12 @@ public class carController : MonoBehaviour
     {
         switchTime = Random.Range(minSwitchTime, maxTurnAngle);
     }
+
+    private IEnumerator HazardSlow()
+    {
+        hazardEffect = true;
+        yield return new WaitForSeconds(4);
+        hazardEffect = false;
+    }
+
 }
