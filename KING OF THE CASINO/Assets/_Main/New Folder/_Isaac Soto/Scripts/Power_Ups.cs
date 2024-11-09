@@ -11,6 +11,7 @@ using UnityEngine;
 public class Power_Ups : MonoBehaviour
 {
     public Freeze freezeScript;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -30,32 +31,15 @@ public class Power_Ups : MonoBehaviour
             int Value = Random.Range(0, 3);
             if (Value == 0)
             {
-                if (freezeScript!= null) // Check if testScript is assigned
-                {
-                    freezeScript.Freezing();
-                    Debug.Log("All agents frozen for 5 seconds.");
-                }
-                Debug.Log("PowerUp1");
+                SpeedBoost();
             }
             else if (Value == 1)
             {
-                if (freezeScript != null) // Check if testScript is assigned
-                {
-                    freezeScript.Freezing();
-                    Debug.Log("All agents frozen for 5 seconds.");
-                }
-                Debug.Log("PowerUp1");
-
-
+                Freeze();
             }
             else if (Value == 2)
             {
-                if (freezeScript != null) // Check if testScript is assigned
-                {
-                    freezeScript.Freezing();
-                    Debug.Log("All agents frozen for 5 seconds.");
-                }
-                Debug.Log("PowerUp1");
+                DoublePoints();
             }
 
             Destroy(gameObject);
@@ -64,9 +48,36 @@ public class Power_Ups : MonoBehaviour
       
     }
 
-   
+   public void Freeze()
+   {
+
+        if (freezeScript != null) // Check if testScript is assigned
+        {
+            freezeScript.Freezing();
+            Debug.Log("All agents frozen for 5 seconds.");
+        }
+        Debug.Log("ALLOW ME TO BREAK THE ICE");
 
 
+   }
+
+    public void DoublePoints()
+    {
+
+
+        
+        Debug.Log("GET RICH AND CRASH");
+
+    }
+
+
+    public void SpeedBoost()
+    {
+
+       
+        Debug.Log("NEED FOR MF SPEED");
+
+    }
 }
    
     
