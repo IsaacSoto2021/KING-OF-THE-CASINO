@@ -11,6 +11,7 @@ using UnityEngine;
 public class Power_Ups : MonoBehaviour
 {
     public Freeze freezeScript;
+    public carController carScript;
 
     // Start is called before the first frame update
     public void Start()
@@ -47,7 +48,12 @@ public class Power_Ups : MonoBehaviour
             }
             else if (Value == 2)
             {
-              
+                if (carScript != null) // Check if script assigned
+                {
+                    StartCoroutine(carScript.speedBoost());
+                    Debug.Log("Boost Time!");
+                }
+                Debug.Log("PowerUp2");
             }
 
             Destroy(gameObject);

@@ -18,7 +18,7 @@ public class carController : MonoBehaviour
     public float breakingForce = 1000f;
     public float maxTurnAngle = 15f;
 
-    private float currentAcceleration = 1000f;
+    public float currentAcceleration = 1000f;
     public float currentTurnAngle = 15f;
 
     //Random Control
@@ -36,6 +36,9 @@ public class carController : MonoBehaviour
     //Variables for Hazard effects
     public float hazardSpeed = 200f;
     public bool hazardEffect = false;
+
+    //Speed Boost
+    public float speedSwitch = 10000f;
 
 
     //Score Count
@@ -220,6 +223,15 @@ public class carController : MonoBehaviour
         hazardEffect = true;
         yield return new WaitForSeconds(4);
         hazardEffect = false;
+    }
+
+    public IEnumerator speedBoost()
+    {
+        Debug.Log("Boost On");
+        currentAcceleration = speedSwitch;
+        yield return new WaitForSeconds(1f);
+        currentAcceleration = acceleration;
+        Debug.Log("Boost Off");
     }
 
 }

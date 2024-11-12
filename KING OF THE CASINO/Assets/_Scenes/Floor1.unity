@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1421,6 +1421,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2036381259}
     m_Modifications:
+    - target: {fileID: -4906593171767630527, guid: 80359f6c69b7dd14e916a585f2374c24,
+        type: 3}
+      propertyPath: carScript
+      value: 
+      objectReference: {fileID: 427621185}
     - target: {fileID: 4060257321736076400, guid: 80359f6c69b7dd14e916a585f2374c24,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3357,6 +3362,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &427621185 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
+    type: 3}
+  m_PrefabInstance: {fileID: 572551347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427621179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196157035120c3d47a872cf7102803b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &433151404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4357,12 +4374,12 @@ PrefabInstance:
     - target: {fileID: 1136460897540426339, guid: 11a5c7fd2d82d774795a3cffa3e99098,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: 1136460897540426339, guid: 11a5c7fd2d82d774795a3cffa3e99098,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13
+      value: -9.249071
       objectReference: {fileID: 0}
     - target: {fileID: 1136460897540426339, guid: 11a5c7fd2d82d774795a3cffa3e99098,
         type: 3}
