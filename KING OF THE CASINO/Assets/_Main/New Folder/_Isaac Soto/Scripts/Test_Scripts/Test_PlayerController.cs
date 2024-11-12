@@ -7,8 +7,10 @@ public class Test_PlayerController : MonoBehaviour
     public float movespeed = 5f;
     public float mouseSensitivity = 100f;
     public Transform Player;
-
     private float xRotation = 0f;
+    public int PlayerMoney = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +30,14 @@ public class Test_PlayerController : MonoBehaviour
         transform.Translate(move * movespeed * Time.deltaTime, Space.World);
 
     }
-
+    public void AddPoints(int pointsToAdd)
+    {
+       PlayerMoney  += pointsToAdd; // Add the points to the player's total
+       Debug.Log("Player points: " + PlayerMoney);
+    }
     public void MouseMovement()
     {
+
         // Mouse look
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
