@@ -6,7 +6,7 @@ public class DoublePoints : MonoBehaviour
 {
     public string slotMachineTag = "SlotMachine"; 
     public float multiplier = 2f; 
-    public float effectDuration = 5f; 
+    public float effectDuration = 10f; 
     public GameObject Image; 
     private bool isPowerUpActive = false;
 
@@ -54,7 +54,7 @@ public class DoublePoints : MonoBehaviour
         if (Image != null)
         {
             Image.SetActive(true);
-            StartCoroutine(HideImageAfterDelay(5f));
+            StartCoroutine(HideImageAfterDelay(10f));
         }
     }
 

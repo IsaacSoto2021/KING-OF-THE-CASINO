@@ -252,7 +252,7 @@ PrefabInstance:
     - target: {fileID: 5816611596122033885, guid: e0bdb54674029b5469d92816130ceb8d,
         type: 3}
       propertyPath: PlayerMoney
-      value: 2000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 6942290691244554922, guid: e0bdb54674029b5469d92816130ceb8d,
         type: 3}
@@ -771,6 +771,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1835431533}
     m_Modifications:
+    - target: {fileID: 2998047957669793617, guid: 7893bfe85ac6fc04d98692763089420d,
+        type: 3}
+      propertyPath: m_text
+      value: 'All Enemies are frozen for 5 seconds
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998047957669793617, guid: 7893bfe85ac6fc04d98692763089420d,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 108.09507
+      objectReference: {fileID: 0}
     - target: {fileID: 4303463966810548391, guid: 7893bfe85ac6fc04d98692763089420d,
         type: 3}
       propertyPath: m_Name
@@ -826,6 +838,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7183689318305032513, guid: 7893bfe85ac6fc04d98692763089420d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -839,6 +856,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1835431533}
     m_Modifications:
+    - target: {fileID: 2116516858538972342, guid: 0f57d83e367d0a74c8059e604d647350,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2382289142659920516, guid: 0f57d83e367d0a74c8059e604d647350,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -997,6 +1019,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 940962586703447541, guid: fddd8df66755ebb4984edfe51a89ea51,
+        type: 3}
+      propertyPath: effectDuration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4450761152978076283, guid: fddd8df66755ebb4984edfe51a89ea51,
         type: 3}
       propertyPath: m_Name
@@ -1010,7 +1037,7 @@ PrefabInstance:
     - target: {fileID: 6568675935905406320, guid: fddd8df66755ebb4984edfe51a89ea51,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7420678321528447322, guid: fddd8df66755ebb4984edfe51a89ea51,
         type: 3}

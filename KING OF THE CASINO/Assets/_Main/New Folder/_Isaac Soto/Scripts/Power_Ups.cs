@@ -17,19 +17,25 @@ public class Power_Ups : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            int Value = Random.Range(0, 3); // Randomly choose one of the power-ups.
+            int Value = Random.Range(0, 3); 
 
-            // You can adjust this logic depending on how you want to trigger the power-ups.
+          
             if (Value == 0)
             {
-                Freeze(); // Activate freeze effect.
+                
+
             }
             else if (Value == 1 || Value == 2)
             {
-                DoubleUp(); // Activate double points effect.
-            }
+              
+                Freeze(); // Activate freeze effect.
 
-            // Destroy the power-up object after it's used.
+            }
+            else if (Value == 3)
+            {
+                DoubleUp();  // Activate double points effect.
+
+            }
             Destroy(gameObject);
         }
     }
@@ -45,8 +51,6 @@ public class Power_Ups : MonoBehaviour
         {
             Debug.Log("Freeze script is not assigned.");
         }
-
-        Debug.Log("ALLOW ME TO BREAK THE ICE");
     }
 
     public void DoubleUp()
@@ -64,6 +68,9 @@ public class Power_Ups : MonoBehaviour
 
     public void SpeedBoost()
     {
+
+
+
         // Implement speed boost logic here, if needed.
         Debug.Log("NEED FOR MF SPEED");
     }

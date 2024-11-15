@@ -42,14 +42,6 @@ public class Test_Slots : MonoBehaviour
         Debug.Log("You are winner, hahaha!");
     }
 
-
-
-
-
-
-
-
-
 }
 
 
