@@ -4706,6 +4706,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c7051353c0e4f0e4d92add9b4458dc0d, type: 2}
+    - target: {fileID: 2406952986314588219, guid: 55adbc7aa060d3e4ea278b0948c6c874,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.4214196
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406952986314588219, guid: 55adbc7aa060d3e4ea278b0948c6c874,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.83929014
+      objectReference: {fileID: 0}
     - target: {fileID: 2797995538961588985, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4773,6 +4783,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}
+      propertyPath: jumpPower
+      value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
+        type: 3}
       propertyPath: flipDetect
       value: 0.1
       objectReference: {fileID: 0}
@@ -4800,6 +4815,11 @@ PrefabInstance:
         type: 3}
       propertyPath: currentTurnAngle
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
+        type: 3}
+      propertyPath: currentAcceleration
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4613706676163605732, guid: 55adbc7aa060d3e4ea278b0948c6c874,
         type: 3}

@@ -12,7 +12,6 @@ public class carController : MonoBehaviour
 
     //Car Controller
     public float acceleration = 1000f;
-    public float reverseAcceleration = -1000f;
     public AudioSource carBreakSFX;
 
     public float breakingForce = 1000f;
@@ -20,6 +19,11 @@ public class carController : MonoBehaviour
 
     public float currentAcceleration = 1000f;
     public float currentTurnAngle = 15f;
+
+    //Car Jump
+    public float jumpPower = 100000;
+    public bool grounded;
+    private Rigidbody rigidBody;
 
     //Random Control
     private bool mouseControl = false;
@@ -35,6 +39,7 @@ public class carController : MonoBehaviour
 
     //Variables for Hazard effects
     public float hazardSpeed = 200f;
+    public float hazardReverseSpeed = -200f;
     public bool hazardEffect = false;
 
     //Speed Boost
@@ -99,32 +104,53 @@ public class carController : MonoBehaviour
     private void Start()
     {
         setRandomTime();
+        rigidBody = GetComponent<Rigidbody>();
+        grounded = true;
     }
 
     private void FixedUpdate()
     {
-        //reverse accelerate 
+        //Acceleration Gear Switch
         if ( Input.GetAxisRaw("Vertical") > 0)
         {
+            //If there are no hazard effects, acceleration is kept
             if (hazardEffect == false)
             {
                 print("Go Forward");
                 currentAcceleration = acceleration;
             }
+            //else acceleration is hazard speed
             else
             {
                 currentAcceleration = hazardSpeed;
             }
 
         }
-        if (Input.GetAxisRaw("Vertical") < 0)
+        else if (Input.GetAxisRaw("Vertical") < 0)
         {
-            print("Go Backward");
-            currentAcceleration = reverseAcceleration;
+            //If there are no hazard effects, reverse acceleration is kept
+            if (hazardEffect == false)
+            {
+                print("Go Backward");
+                currentAcceleration = -acceleration;
+            }
+            //else reverse acceleration is hazard reverse speed
+            else
+            {
+                currentAcceleration = -hazardSpeed;
+            }
+        }
+
+        print("Current Acceleration: " + currentAcceleration);
+
+        //If player press space and grounded is true, start coroutine
+        if (Input.GetKey(KeyCode.Space) && grounded)
+        {
+            StartCoroutine(jumpBoost());
         }
 
 
-            //If mouse control is true, the player will use the mouse, else they use the keyboard
+        //If mouse control is true, the player will use the mouse, else they use the keyboard
         if (mouseControl)
         {
             print("Mouse Time!");
@@ -234,4 +260,13 @@ public class carController : MonoBehaviour
         Debug.Log("Boost Off");
     }
 
+    //Jumps and have five seconds cool down to jump again
+    private IEnumerator jumpBoost()
+    {
+        Debug.Log("Jump go!");
+        rigidBody.AddForce(Vector3.up * jumpPower);
+        grounded = false;
+        yield return new WaitForSeconds(5f);
+        grounded = true;
+    }
 }
