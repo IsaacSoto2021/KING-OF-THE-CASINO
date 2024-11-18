@@ -103,12 +103,19 @@ public class carController : MonoBehaviour
 
         }
 
-        //enemt collision, needs to detect if colliding object is tagged as enemy and if GhostActive is false
-        if (collision.gameObject.tag == "Enemy") 
+        //Enemy Collision, checks if collision is with enemy, then checks if ghost mode is active and either ends game or has a pass through
+        if (collision.gameObject.tag == "Enemy")
         {
-            SceneManager.LoadScene(3);
+            if (GhostActive == false)
+            {
+                SceneManager.LoadScene(3);
+            }
+            else if (GhostActive == true)
+            {
+                Debug.Log("Enemy Pass Through");
+            }
         }
-        //checks if GhostActive = true
+      
 
     }
 
@@ -199,6 +206,12 @@ public class carController : MonoBehaviour
         {
             SceneManager.LoadScene(4);
         }
+
+        //Activates ghost mode on button press
+        if (Input.GetKeyDown (KeyCode.R))
+        {
+            StartCoroutine(GhostMode());
+        }
     }
 
     private void keyboardButtons()
@@ -286,6 +299,7 @@ public class carController : MonoBehaviour
     {
         Debug.Log("Ghost Mode is Active)");
         GhostActive = true;
+        GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(GhostDuration);
         GhostActive = false;
 
