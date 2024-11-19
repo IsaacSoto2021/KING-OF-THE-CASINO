@@ -11,60 +11,69 @@ using UnityEngine;
 public class Power_Ups : MonoBehaviour
 {
     public Freeze freezeScript;
-    public carController carScript;
-
-    // Start is called before the first frame update
-    public void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    public void Update()
-    {
-
-    }
+    public DoublePoints TimesScript;
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            int Value = Random.Range(0, 3);
+            int Value = Random.Range(0, 3); 
+
+          
             if (Value == 0)
             {
                 
-                Debug.Log("PowerUp1");
+
             }
-            else if (Value == 1)
+            else if (Value == 1 || Value == 2)
             {
-                if (freezeScript != null) // Check if testScript is assigned
-                {
-                    freezeScript.Freezing();
-                    Debug.Log("All agents frozen for 5 seconds.");
-                }
-                Debug.Log("PowerUp1");
-
+              
+                Freeze(); // Activate freeze effect.
 
             }
-            else if (Value == 2)
+            else if (Value == 3)
             {
-                if (carScript != null) // Check if script assigned
-                {
-                    StartCoroutine(carScript.speedBoost());
-                    Debug.Log("Boost Time!");
-                }
-                Debug.Log("PowerUp2");
-            }
+                DoubleUp();  // Activate double points effect.
 
+            }
             Destroy(gameObject);
         }
-
-      
     }
 
-   
+    public void Freeze()
+    {
+        if (freezeScript != null) // Check if the Freeze script is assigned.
+        {
+            freezeScript.Freezing(); // Call the freezing method in the Freeze script.
+            Debug.Log("All agents frozen for 5 seconds.");
+        }
+        else
+        {
+            Debug.Log("Freeze script is not assigned.");
+        }
+    }
+
+    public void DoubleUp()
+    {
+        if (TimesScript != null)
+        {
+            TimesScript.ActivateDoublePointsPowerUp(); // Call the method in DoublePoints script.
+            Debug.Log("GET RICH AND CRASH");
+        }
+        else
+        {
+            Debug.Log("DoublePoints script is not assigned.");
+        }
+    }
+
+    public void SpeedBoost()
+    {
 
 
+
+        // Implement speed boost logic here, if needed.
+        Debug.Log("NEED FOR MF SPEED");
+    }
 }
    
     
