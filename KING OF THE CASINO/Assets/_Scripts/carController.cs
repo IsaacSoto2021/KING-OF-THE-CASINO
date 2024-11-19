@@ -45,9 +45,12 @@ public class carController : MonoBehaviour
     //Speed Boost
     public float speedSwitch = 10000f;
 
+    //Image
+    public GameObject Image;
 
     //Score Count
-    public int money = 10000;
+    public int PlayerMoney = 10000;
+    public bool isPowerUpActive = false;
 
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
@@ -58,33 +61,33 @@ public class carController : MonoBehaviour
             int Value = Random.Range(0, 5);
             if (Value == 0)
             {
-                money -= 1000;
+                PlayerMoney -= 1000;
                 Debug.Log("You lose 1000 points");
             }
             else if (Value == 1)
             {
-                money -= 2000;
+                PlayerMoney -= 2000;
                 Debug.Log("You lose 2000 points");
             }
             else if (Value == 2)
             {
-                money -= 3000;
+                PlayerMoney -= 3000;
                 Debug.Log("You lose 3000 points");
 
             }
             else if (Value == 3)
             {
-                money -= 4000;
+                PlayerMoney -= 4000;
                 Debug.Log("You lose 4000 points");
             }
             else if (Value == 4)
             {
-                money -= 5000;
+                PlayerMoney -= 5000;
                 Debug.Log("You lose 5000 points");
             }
             else if (Value == 5)
             {
-                money -= 6000;
+                PlayerMoney -= 6000;
                 Debug.Log("You lose 6000 points");
             }
 
@@ -183,7 +186,7 @@ public class carController : MonoBehaviour
         detectUpsideDown();
 
         //Loads win screen when player accomplishes objective
-        if (money <= 0)
+        if (PlayerMoney <= 0)
         {
             SceneManager.LoadScene(4);
         }
@@ -223,6 +226,12 @@ public class carController : MonoBehaviour
         }
     }
 
+    public void AddPoints(int pointsToAdd)
+    {
+        PlayerMoney += pointsToAdd; // Add the points to the player's total
+        Debug.Log("Player points: " + PlayerMoney);
+    }
+
     //Flips the car
     IEnumerator flipsCar()
     {
@@ -253,11 +262,31 @@ public class carController : MonoBehaviour
 
     public IEnumerator speedBoost()
     {
+        ShowImage();
         Debug.Log("Boost On");
         currentAcceleration = speedSwitch;
         yield return new WaitForSeconds(1f);
         currentAcceleration = acceleration;
         Debug.Log("Boost Off");
+    }
+
+    private void ShowImage()
+    {
+        if (Image != null)
+        {
+            print("Image Shown");
+            Image.SetActive(true);
+            StartCoroutine(HideImageAfterDelay(10f));
+        }
+    }
+
+    private IEnumerator HideImageAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (Image != null)
+        {
+            Image.SetActive(false);
+        }
     }
 
     //Jumps and have five seconds cool down to jump again

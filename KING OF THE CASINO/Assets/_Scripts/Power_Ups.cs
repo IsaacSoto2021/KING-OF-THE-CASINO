@@ -12,6 +12,7 @@ public class Power_Ups : MonoBehaviour
 {
     public Freeze freezeScript;
     public carController carScript;
+    public Power_Ups powerUpScript;
 
     // Start is called before the first frame update
     public void Start()
