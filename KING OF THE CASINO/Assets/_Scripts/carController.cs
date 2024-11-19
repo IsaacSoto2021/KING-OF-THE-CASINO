@@ -42,6 +42,10 @@ public class carController : MonoBehaviour
     public float hazardReverseSpeed = -200f;
     public bool hazardEffect = false;
 
+    //Variables for Ghost Ability
+    public bool GhostActive = false;
+    public int GhostDuration = 10;
+
     //Speed Boost
     public float speedSwitch = 10000f;
 
@@ -101,6 +105,21 @@ public class carController : MonoBehaviour
             StartCoroutine(HazardSlow());
 
         }
+
+        //Enemy Collision, checks if collision is with enemy, then checks if ghost mode is active and either ends game or has a pass through
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (GhostActive == false)
+            {
+                SceneManager.LoadScene(3);
+            }
+            else if (GhostActive == true)
+            {
+                Debug.Log("Enemy Pass Through");
+            }
+        }
+      
+
     }
 
 
@@ -189,6 +208,12 @@ public class carController : MonoBehaviour
         if (PlayerMoney <= 0)
         {
             SceneManager.LoadScene(4);
+        }
+
+        //Activates ghost mode on button press
+        if (Input.GetKeyDown (KeyCode.R))
+        {
+            StartCoroutine(GhostMode());
         }
     }
 
@@ -297,5 +322,16 @@ public class carController : MonoBehaviour
         grounded = false;
         yield return new WaitForSeconds(5f);
         grounded = true;
+    }
+
+    private IEnumerator GhostMode()
+    {
+        Debug.Log("Ghost Mode is Active)");
+        GhostActive = true;
+        GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(GhostDuration);
+        GhostActive = false;
+
+
     }
 }
