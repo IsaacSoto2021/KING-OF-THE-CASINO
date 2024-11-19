@@ -12,7 +12,7 @@ public class Power_Ups : MonoBehaviour
 {
     public Freeze freezeScript;
     public carController carScript;
-    public Power_Ups powerUpScript;
+    public DoublePoints PointScript;
 
     // Start is called before the first frame update
     public void Start()
@@ -33,8 +33,12 @@ public class Power_Ups : MonoBehaviour
             int Value = Random.Range(0, 3);
             if (Value == 0)
             {
-                
-                Debug.Log("PowerUp1");
+                if(PointScript != null)
+                {
+                    PointScript.ActivateDoublePointsPowerUp();
+                    
+                }
+                Debug.Log("DOUBLEPOINTS");
             }
             else if (Value == 1)
             {
