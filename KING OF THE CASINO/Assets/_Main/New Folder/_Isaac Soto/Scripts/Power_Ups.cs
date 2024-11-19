@@ -19,7 +19,6 @@ public class Power_Ups : MonoBehaviour
         {
             int Value = Random.Range(0, 3); 
 
-          
             if (Value == 0)
             {
                 
