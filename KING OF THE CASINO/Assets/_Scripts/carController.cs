@@ -290,7 +290,7 @@ public class carController : MonoBehaviour
         ShowImage();
         Debug.Log("Boost On");
         currentAcceleration = speedSwitch;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5f);
         currentAcceleration = acceleration;
         Debug.Log("Boost Off");
     }
@@ -301,7 +301,7 @@ public class carController : MonoBehaviour
         {
             print("Image Shown");
             Image.SetActive(true);
-            StartCoroutine(HideImageAfterDelay(10f));
+            StartCoroutine(HideImageAfterDelay(5f));
         }
     }
 
