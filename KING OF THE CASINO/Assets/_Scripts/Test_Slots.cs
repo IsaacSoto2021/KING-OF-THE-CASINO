@@ -13,7 +13,7 @@ public class Test_Slots : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        var ply = other.GetComponent<Test_PlayerController>();
+        var ply = other.GetComponent<carController>();
         if (ply == null) return;
 
         // Money Bet = Public int money 

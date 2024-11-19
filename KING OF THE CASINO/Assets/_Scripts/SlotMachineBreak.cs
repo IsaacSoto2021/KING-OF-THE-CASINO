@@ -7,15 +7,7 @@ public class SlotMachineBreak : MonoBehaviour
     public int Money = 1000;
     public bool isPowerUpActive = false;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            GetComponent<Renderer>().material.color = Color.gray;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         var ply = other.GetComponent<carController>();
         if (ply == null) return;
@@ -29,8 +21,8 @@ public class SlotMachineBreak : MonoBehaviour
 
         ply.AddPoints(-Bet);
 
-        var chance = Random.Range(0, 7);
-        if (chance < 7)
+        var chance = Random.Range(0, 5);
+        if (chance <= 0)
         {
             Debug.Log("You stink, loser.");
             return;
@@ -40,5 +32,20 @@ public class SlotMachineBreak : MonoBehaviour
         var RewardScale = Random.Range(1, 10);
         ply.AddPoints(Bet * RewardScale);
         Debug.Log("You are winner, hahaha!");
+
+
+        GetComponent<Renderer>().material.color = Color.gray;
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+ }
