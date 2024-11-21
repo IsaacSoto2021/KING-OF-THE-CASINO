@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class carController : MonoBehaviour
 {
+
     [SerializeField] WheelCollider frontRight;
     [SerializeField] WheelCollider frontLeft;
     [SerializeField] WheelCollider backRight;
@@ -48,6 +50,11 @@ public class carController : MonoBehaviour
     public GameObject carBody;
     public bool GhostCooldown = false;
 
+    //Game reference for Objective UI
+    public GameObject objectives;
+
+    //
+    [SerializeField] Text scoreCounter;
 
     //Speed Boost
     public float speedSwitch = 10000f;
@@ -125,16 +132,21 @@ public class carController : MonoBehaviour
 
     }
 
-
     private void Start()
     {
         setRandomTime();
         rigidBody = GetComponent<Rigidbody>();
         grounded = true;
+
+        StartCoroutine (ObjectivesVisi());
+
     }
 
     private void FixedUpdate()
     {
+        //Updates Score UI
+        scoreCounter.text = PlayerMoney.ToString("Money:" + PlayerMoney);
+
         //Acceleration Gear Switch
         if ( Input.GetAxisRaw("Vertical") > 0)
         {
@@ -339,6 +351,14 @@ public class carController : MonoBehaviour
         yield return new WaitForSeconds(5);
         GhostCooldown = false;
 
+
+    }
+
+    private IEnumerator ObjectivesVisi()
+    {
+        objectives.active = true;
+        yield return new WaitForSeconds(10);
+        objectives.active = false;
 
     }
 }
