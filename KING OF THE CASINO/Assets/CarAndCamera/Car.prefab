@@ -722,6 +722,7 @@ MonoBehaviour:
   hazardEffect: 0
   GhostActive: 0
   GhostDuration: 10
+  carBody: {fileID: 2037529254298589610}
   speedSwitch: 10000
   Image: {fileID: 0}
   PlayerMoney: 10000

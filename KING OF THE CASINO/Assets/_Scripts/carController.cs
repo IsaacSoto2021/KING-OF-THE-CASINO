@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class carController : MonoBehaviour
 {
+
     [SerializeField] WheelCollider frontRight;
     [SerializeField] WheelCollider frontLeft;
     [SerializeField] WheelCollider backRight;
@@ -45,6 +47,14 @@ public class carController : MonoBehaviour
     //Variables for Ghost Ability
     public bool GhostActive = false;
     public int GhostDuration = 10;
+    public GameObject carBody;
+    public bool GhostCooldown = false;
+
+    //Game reference for Objective UI
+    public GameObject objectives;
+
+    //
+    [SerializeField] Text scoreCounter;
 
     //Speed Boost
     public float speedSwitch = 10000f;
@@ -122,16 +132,21 @@ public class carController : MonoBehaviour
 
     }
 
-
     private void Start()
     {
         setRandomTime();
         rigidBody = GetComponent<Rigidbody>();
         grounded = true;
+
+        StartCoroutine (ObjectivesVisi());
+
     }
 
     private void FixedUpdate()
     {
+        //Updates Score UI
+        scoreCounter.text = PlayerMoney.ToString("Money:" + PlayerMoney);
+
         //Acceleration Gear Switch
         if ( Input.GetAxisRaw("Vertical") > 0)
         {
@@ -211,7 +226,7 @@ public class carController : MonoBehaviour
         }
 
         //Activates ghost mode on button press
-        if (Input.GetKeyDown (KeyCode.R))
+        if (Input.GetKeyDown (KeyCode.R) && GhostCooldown == false)
         {
             StartCoroutine(GhostMode());
         }
@@ -328,10 +343,22 @@ public class carController : MonoBehaviour
     {
         Debug.Log("Ghost Mode is Active)");
         GhostActive = true;
-        GetComponent<Renderer>().material.color = Color.white;
+        carBody.GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(GhostDuration);
         GhostActive = false;
+        carBody.GetComponent<Renderer>().material.color = Color.green;
+        GhostCooldown = true;
+        yield return new WaitForSeconds(5);
+        GhostCooldown = false;
 
+
+    }
+
+    private IEnumerator ObjectivesVisi()
+    {
+        objectives.active = true;
+        yield return new WaitForSeconds(10);
+        objectives.active = false;
 
     }
 }
