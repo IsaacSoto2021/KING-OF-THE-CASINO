@@ -339,6 +339,7 @@ public class carController : MonoBehaviour
         grounded = true;
     }
 
+    //Coroutine for the ghost ability. Sets ghost mode true for short period, dictating what happens in OnCollisionEnter
     private IEnumerator GhostMode()
     {
         Debug.Log("Ghost Mode is Active)");
@@ -354,6 +355,7 @@ public class carController : MonoBehaviour
 
     }
 
+    //Coroutine for objective ui, setting it so its only present on screen for 10 seconds.
     private IEnumerator ObjectivesVisi()
     {
         objectives.active = true;
