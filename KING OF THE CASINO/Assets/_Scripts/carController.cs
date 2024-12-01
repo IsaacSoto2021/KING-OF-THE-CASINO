@@ -66,6 +66,9 @@ public class carController : MonoBehaviour
     public int PlayerMoney = 10000;
     public bool isPowerUpActive = false;
 
+
+
+
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
     {
@@ -73,7 +76,7 @@ public class carController : MonoBehaviour
         if (collision.gameObject.CompareTag("Breakable"))
         {
             int Value = Random.Range(0, 5);
-            if (Value == 0)
+          if (Value == 0)
             {
                 PlayerMoney -= 1000;
                 Debug.Log("You lose 1000 points");
