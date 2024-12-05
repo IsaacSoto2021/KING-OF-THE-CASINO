@@ -119,6 +119,13 @@ public class carController : MonoBehaviour
 
         }
 
+        //Obstacle Collision
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            collision.gameObject.SetActive(false);
+        }
+
+
         //Enemy Collision, checks if collision is with enemy, then checks if ghost mode is active and either ends game or has a pass through
         if (collision.gameObject.tag == "Enemy")
         {
