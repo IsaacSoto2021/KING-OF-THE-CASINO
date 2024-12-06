@@ -19,7 +19,7 @@ public class carController : MonoBehaviour
     public float breakingForce = 1000f;
     public float maxTurnAngle = 15f;
 
-    public float currentAcceleration = 1000f;
+    public float currentAcceleration = 0f;
     public float currentTurnAngle = 15f;
 
     //Car Jump
@@ -125,6 +125,8 @@ public class carController : MonoBehaviour
             if (GhostActive == false)
             {
                 SceneManager.LoadScene(3);
+                Cursor.lockState = CursorLockMode.None;
+
             }
             else if (GhostActive == true)
             {
@@ -140,18 +142,19 @@ public class carController : MonoBehaviour
         setRandomTime();
         rigidBody = GetComponent<Rigidbody>();
         grounded = true;
-
         StartCoroutine (ObjectivesVisi());
-
+        Cursor.lockState = CursorLockMode.Locked;
+        rigidBody.centerOfMass = new Vector3(0, -1, 0);
     }
 
     private void FixedUpdate()
     {
+        rigidBody.AddForce(transform.forward * currentAcceleration);
         //Updates Score UI
         scoreCounter.text = PlayerMoney.ToString("Money:" + PlayerMoney);
 
         //Acceleration Gear Switch
-        if ( Input.GetAxisRaw("Vertical") > 0)
+        if (Input.GetAxisRaw("Vertical") > 0)
         {
             //If there are no hazard effects, acceleration is kept
             if (hazardEffect == false)
@@ -179,6 +182,10 @@ public class carController : MonoBehaviour
             {
                 currentAcceleration = -hazardSpeed;
             }
+        }
+        else
+        {
+            currentAcceleration = acceleration;
         }
 
         print("Current Acceleration: " + currentAcceleration);
@@ -226,6 +233,7 @@ public class carController : MonoBehaviour
         if (PlayerMoney <= 0)
         {
             SceneManager.LoadScene(4);
+            Cursor.lockState = CursorLockMode.None;
         }
 
         //Activates ghost mode on button press
