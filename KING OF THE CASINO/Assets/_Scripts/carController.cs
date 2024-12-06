@@ -119,6 +119,13 @@ public class carController : MonoBehaviour
 
         }
 
+        //Obstacle Collision
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            collision.gameObject.SetActive(false);
+        }
+
+
         //Enemy Collision, checks if collision is with enemy, then checks if ghost mode is active and either ends game or has a pass through
         if (collision.gameObject.tag == "Enemy")
         {
@@ -356,7 +363,7 @@ public class carController : MonoBehaviour
         Debug.Log("Ghost Mode is Active)");
         GhostActive = true;
         carBody.GetComponent<Renderer>().material.color = Color.white;
-        yield return new WaitForSeconds(GhostDuration);
+        yield return new WaitForSeconds(10);
         GhostActive = false;
         carBody.GetComponent<Renderer>().material.color = Color.green;
         GhostCooldown = true;
