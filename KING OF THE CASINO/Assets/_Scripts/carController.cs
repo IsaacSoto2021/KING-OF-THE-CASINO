@@ -355,7 +355,7 @@ public class carController : MonoBehaviour
         Debug.Log("Ghost Mode is Active)");
         GhostActive = true;
         carBody.GetComponent<Renderer>().material.color = Color.white;
-        yield return new WaitForSeconds(GhostDuration);
+        yield return new WaitForSeconds(10);
         GhostActive = false;
         carBody.GetComponent<Renderer>().material.color = Color.green;
         GhostCooldown = true;
