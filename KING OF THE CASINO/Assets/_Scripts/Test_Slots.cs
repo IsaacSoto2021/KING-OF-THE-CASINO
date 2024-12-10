@@ -8,12 +8,12 @@ using UnityEngine;
  */
 public class Test_Slots : MonoBehaviour
 {
-    public int Money = 1000;
+    public int Money = 25000;
     public bool isPowerUpActive = false; 
 
     void OnTriggerEnter(Collider other)
     {
-        var ply = other.GetComponent<carController>();
+        var ply = other.GetComponent <carController>();
         if (ply == null) return;
 
         // Money Bet = Public int money 
@@ -29,15 +29,15 @@ public class Test_Slots : MonoBehaviour
         ply.AddPoints(-Bet);
 
        // random range of losing 
-        var chance = Random.Range(0, 10);
-        if (chance < 7)
+        var chance = Random.Range(0, 100);
+        if (chance < 75)
         {
             Debug.Log("You stink, loser.");
             return;
         }
 
        //Random range of winning 
-        var RewardScale = Random.Range(1, 10); 
+        var RewardScale = Random.Range(1, 100); 
         ply.AddPoints(Bet * RewardScale); 
         Debug.Log("You are winner, hahaha!");
     }

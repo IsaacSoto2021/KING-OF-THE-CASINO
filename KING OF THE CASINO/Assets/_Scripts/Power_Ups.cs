@@ -25,13 +25,13 @@ public class Power_Ups : MonoBehaviour
                 SpeedBoost(); //Activate speedboost effect.
 
             }
-            else if (Value == 1 || Value == 2)
+            else if (Value == 1 )
             {
 
                 Freeze(); // Activate freeze effect.
 
             }
-            else if (Value == 3)
+            else if (Value == 2)
             {
                 DoubleUp();  // Activate double points effect.
 
