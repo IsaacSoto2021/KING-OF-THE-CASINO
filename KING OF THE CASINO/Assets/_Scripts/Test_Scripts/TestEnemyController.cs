@@ -9,6 +9,14 @@ public class TestEnemyController : MonoBehaviour
     public Transform player;
     private NavMeshAgent agent;
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            collision.gameObject.SetActive(false);
+        }
+    }
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
