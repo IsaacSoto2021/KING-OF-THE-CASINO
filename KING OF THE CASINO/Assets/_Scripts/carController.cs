@@ -28,7 +28,7 @@ public class carController : MonoBehaviour
     private Rigidbody rigidBody;
 
     //Random Control
-    private bool mouseControl = false;
+    private bool mouseControl = true;
     public float minSwitchTime = 5f;
     public float maxSwitchTime = 10f;
     public float switchTime;
@@ -146,7 +146,7 @@ public class carController : MonoBehaviour
 
     private void Start()
     {
-        setRandomTime();
+        //setRandomTime();
         rigidBody = GetComponent<Rigidbody>();
         grounded = true;
         StartCoroutine (ObjectivesVisi());
@@ -210,7 +210,7 @@ public class carController : MonoBehaviour
             print("Mouse Time!");
             mouseButtons();
         }
-        else
+        /*else
         {
             print("Keyboard Time!");
             keyboardButtons();
@@ -224,7 +224,7 @@ public class carController : MonoBehaviour
             print("Switcharoo!");
             mouseControl = !mouseControl;
             setRandomTime();
-        }
+        }*/
 
         //apply acceleration to front wheels
         frontRight.motorTorque = currentAcceleration;
@@ -250,11 +250,11 @@ public class carController : MonoBehaviour
         }
     }
 
-    private void keyboardButtons()
+   /* private void keyboardButtons()
     {
         //take care of steering
         currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
-    }
+    }*/
 
     private void mouseButtons()
     {
