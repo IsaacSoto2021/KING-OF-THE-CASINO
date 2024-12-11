@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1353724424200479672}
   - component: {fileID: 3310577244197574362}
   - component: {fileID: 8708359942535758650}
-  - component: {fileID: 7656858059346876250}
+  - component: {fileID: 150348723505336892}
   m_Layer: 0
   m_Name: SlotMachine
   m_TagString: SlotMachine
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.0000007, y: 5.1685476, z: 3.0000007}
   m_Center: {x: 0.5000001, y: 2.5842738, z: 0.5804211}
---- !u!114 &7656858059346876250
+--- !u!114 &150348723505336892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

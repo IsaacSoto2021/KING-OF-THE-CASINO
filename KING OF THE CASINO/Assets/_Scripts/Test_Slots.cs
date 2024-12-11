@@ -41,8 +41,9 @@ public class Test_Slots : MonoBehaviour
         var RewardScale = Random.Range(1, 100); 
         ply.AddPoints(Bet * RewardScale); 
         Debug.Log("You are winner, hahaha!");
+        Destroy(gameObject);
     }
-
+   
 }
 
 
