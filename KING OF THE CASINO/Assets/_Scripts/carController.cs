@@ -159,7 +159,8 @@ public class carController : MonoBehaviour
             //If there are no hazard effects, acceleration is kept
             if (hazardEffect == false)
             {
-               // print("Go Forward");
+                // print("Go Forward");
+                carBrake();
                 currentAcceleration = Mathf.MoveTowards(currentAcceleration, acceleration, carSpeed * Time.deltaTime);
             }
             //else acceleration is hazard speed
@@ -173,7 +174,8 @@ public class carController : MonoBehaviour
             //If there are no hazard effects, reverse acceleration is kept
             if (hazardEffect == false)
             {
-              //  print("Go Backward");
+                //  print("Go Backward");
+                carBrake();
                 currentAcceleration = Mathf.MoveTowards(currentAcceleration, -acceleration, carSpeed * Time.deltaTime);
             }
             //else reverse acceleration is hazard reverse speed
@@ -350,6 +352,13 @@ public class carController : MonoBehaviour
         {
             Image.SetActive(false);
         }
+    }
+
+    private IEnumerator carBrake()
+    {
+        currentBreakingForce = breakingForce * carSpeed * Time.deltaTime;
+        yield return new WaitForSeconds(3f);
+        currentBreakingForce = 0f;
     }
 
     //Jumps and have five seconds cool down to jump again
