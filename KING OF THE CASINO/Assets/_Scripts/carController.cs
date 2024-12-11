@@ -11,18 +11,21 @@ public class carController : MonoBehaviour
     [SerializeField] WheelCollider frontLeft;
     [SerializeField] WheelCollider backRight;
     [SerializeField] WheelCollider backLeft;
-
     //Car Controller
     public float acceleration = 1000f;
+    public float carSpeed = 1000f;
+    public float maxSpeed = 1000f;
+
     public AudioSource carBreakSFX;
 
     public float breakingForce = 1000f;
+    public float currentBreakingForce = 0f;
     public float maxTurnAngle = 15f;
 
     public float currentAcceleration = 0f;
     public float currentTurnAngle = 15f;
 
-    public bool goBack = false;
+    public bool goBack;
 
     //Car Jump
     public float jumpPower = 100000;
@@ -59,13 +62,15 @@ public class carController : MonoBehaviour
     [SerializeField] Text scoreCounter;
 
     //Speed Boost
-    public float speedSwitch = 10000f;
+    public float doubleAcceleration = 10000f;
+    public float doubleSpeed = 10000f;
+    public float doubleMax = 10000f;
 
     //Image
     public GameObject Image;
 
     //Score Count
-    private int PlayerMoney = 1000000;
+    public int PlayerMoney = 0;
     public bool isPowerUpActive = false;
 
     //Image
@@ -75,27 +80,48 @@ public class carController : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //Player loses 25000 whenever they drive through a breakable
-        if (other.CompareTag ("Breakable"))
-        {
-            Destroy(other.gameObject);
-            PlayerMoney -= 25000;
-
-        }
-
-        
-
-
-
-
-
-    }
-
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
     {
+        // Breakable collisions and randomized value chance for each collision
+        if (collision.gameObject.CompareTag("Breakable"))
+        {
+            int Value = Random.Range(0, 5);
+            if (Value == 0)
+            {
+                PlayerMoney -= 1000;
+                Debug.Log("You lose 1000 points");
+            }
+            else if (Value == 1)
+            {
+                PlayerMoney -= 2000;
+                Debug.Log("You lose 2000 points");
+            }
+            else if (Value == 2)
+            {
+                PlayerMoney -= 3000;
+                Debug.Log("You lose 3000 points");
+
+            }
+            else if (Value == 3)
+            {
+                PlayerMoney -= 4000;
+                Debug.Log("You lose 4000 points");
+            }
+            else if (Value == 4)
+            {
+                PlayerMoney -= 5000;
+                Debug.Log("You lose 5000 points");
+            }
+            else if (Value == 5)
+            {
+                PlayerMoney -= 6000;
+                Debug.Log("You lose 6000 points");
+            }
+
+            Destroy(collision.gameObject);
+        }
+
         //Hazard collision
         if (collision.gameObject.tag == "Hazard")
         {
@@ -125,7 +151,7 @@ public class carController : MonoBehaviour
                 Debug.Log("Enemy Pass Through");
             }
         }
-      
+
 
     }
 
@@ -134,7 +160,7 @@ public class carController : MonoBehaviour
         //setRandomTime();
         rigidBody = GetComponent<Rigidbody>();
         grounded = true;
-        StartCoroutine (ObjectivesVisi());
+        StartCoroutine(ObjectivesVisi());
         Cursor.lockState = CursorLockMode.Locked;
         rigidBody.centerOfMass = new Vector3(0, 0, 0);
     }
@@ -143,7 +169,7 @@ public class carController : MonoBehaviour
     {
         rigidBody.AddForce(transform.forward * currentAcceleration);
         //Updates Score UI
-        scoreCounter.text = PlayerMoney.ToString("Money: " + PlayerMoney);
+        scoreCounter.text = "Money: " + PlayerMoney.ToString();
 
         //Acceleration Gear Switch
         if (Input.GetKeyDown(KeyCode.W))
@@ -157,12 +183,12 @@ public class carController : MonoBehaviour
             if (hazardEffect == false)
             {
                 print("Go Forward");
-                currentAcceleration = acceleration;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, acceleration, carSpeed * Time.deltaTime);
             }
             //else acceleration is hazard speed
             else
             {
-                currentAcceleration = hazardSpeed;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, hazardSpeed, carSpeed * Time.deltaTime);
             }
         }
         else
@@ -171,13 +197,20 @@ public class carController : MonoBehaviour
             if (hazardEffect == false)
             {
                 print("Go Backward");
-                currentAcceleration = -acceleration;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, -acceleration, carSpeed * Time.deltaTime);
             }
             //else reverse acceleration is hazard reverse speed
             else
             {
-                currentAcceleration = -hazardSpeed;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, hazardSpeed, carSpeed * Time.deltaTime);
             }
+        }
+
+        // Limit the speed
+        float currentSpeed = rigidBody.velocity.magnitude;
+        if (currentSpeed > maxSpeed)
+        {
+            currentAcceleration = 0f; // Stop accelerating if max speed is reached
         }
 
         print("Current Acceleration: " + currentAcceleration);
@@ -219,6 +252,12 @@ public class carController : MonoBehaviour
         frontLeft.steerAngle = currentTurnAngle;
         frontRight.steerAngle = currentTurnAngle;
 
+        //apply breakforce to four wheels
+        frontLeft.brakeTorque = currentBreakingForce;
+        frontRight.brakeTorque = currentBreakingForce;
+        backLeft.brakeTorque = currentBreakingForce;
+        backRight.brakeTorque = currentBreakingForce;
+
         detectUpsideDown();
 
         //Loads win screen when player accomplishes objective
@@ -229,7 +268,7 @@ public class carController : MonoBehaviour
         }
 
         //Activates ghost mode on button press
-        if (Input.GetKeyDown (KeyCode.R) && GhostCooldown == false)
+        if (Input.GetKeyDown(KeyCode.R) && GhostCooldown == false)
         {
             StartCoroutine(GhostMode());
         }
@@ -269,10 +308,10 @@ public class carController : MonoBehaviour
         }
     }
 
-    public void AddPoints(int pointsToAdd)
+    public void AddPoints(int amount)
     {
-        PlayerMoney += pointsToAdd; // Add the points to the player's total
-        Debug.Log("Player points: " + PlayerMoney);
+        PlayerMoney += amount;  // Add or subtract points (based on the amount)
+        UpdateUI();
     }
 
     //Flips the car
@@ -307,9 +346,13 @@ public class carController : MonoBehaviour
     {
         ShowImage();
         Debug.Log("Boost On");
-        currentAcceleration = speedSwitch;
+        currentAcceleration = doubleAcceleration;
+        carSpeed = doubleSpeed;
+        maxSpeed = doubleMax;
         yield return new WaitForSeconds(5f);
         currentAcceleration = acceleration;
+        carSpeed = 1000f;
+        maxSpeed = 1000f;
         Debug.Log("Boost Off");
     }
 
@@ -370,5 +413,9 @@ public class carController : MonoBehaviour
         yield return new WaitForSeconds(10);
         objectives.active = false;
 
+    }
+    private void UpdateUI()
+    {
+        scoreCounter.text = "Money: " + PlayerMoney.ToString(); // Update UI text with PlayerMoney value
     }
 }

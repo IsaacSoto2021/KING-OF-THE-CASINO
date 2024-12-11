@@ -8,7 +8,7 @@ using UnityEngine;
  */
 public class Test_Slots : MonoBehaviour
 {
-    public int Money = 50000;
+    public int Money = 0;
     public bool isPowerUpActive = false; 
 
     void OnTriggerEnter(Collider other)
