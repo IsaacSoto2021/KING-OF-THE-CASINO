@@ -66,6 +66,10 @@ public class carController : MonoBehaviour
     public int PlayerMoney = 1000000;
     public bool isPowerUpActive = false;
 
+    //Image
+    public GameObject GhostImage;
+    public GameObject JumpImage;
+
 
 
 
@@ -331,9 +335,12 @@ public class carController : MonoBehaviour
     {
         Debug.Log("Jump go!");
         rigidBody.AddForce(Vector3.up * jumpPower);
+
+        JumpImage.SetActive(false);
         grounded = false;
         yield return new WaitForSeconds(5f);
         grounded = true;
+        JumpImage.SetActive(true);
     }
 
     //Coroutine for the ghost ability. Sets ghost mode true for short period, dictating what happens in OnCollisionEnter
@@ -346,9 +353,11 @@ public class carController : MonoBehaviour
         GhostActive = false;
         carBody.GetComponent<Renderer>().material.color = Color.green;
         GhostCooldown = true;
+
+        GhostImage.SetActive(false);
         yield return new WaitForSeconds(5);
         GhostCooldown = false;
-
+        GhostImage.SetActive(true);
 
     }
 
