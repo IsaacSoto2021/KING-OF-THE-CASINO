@@ -446,7 +446,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6575349477326956214}
   serializedVersion: 4
-  m_Mass: 1700
+  m_Mass: 1500
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -503,11 +503,15 @@ MonoBehaviour:
   backRight: {fileID: 946634689939287154}
   backLeft: {fileID: 896014210652449798}
   acceleration: 1000
+  carSpeed: 1000
+  maxSpeed: 1000
   carBreakSFX: {fileID: 6626829217121233043}
   breakingForce: 1000
+  currentBreakingForce: 0
   maxTurnAngle: 60
   currentAcceleration: 0
   currentTurnAngle: 0
+  goBack: 0
   jumpPower: 1000000
   grounded: 0
   minSwitchTime: 5
@@ -525,12 +529,12 @@ MonoBehaviour:
   GhostCooldown: 0
   objectives: {fileID: 0}
   scoreCounter: {fileID: 0}
-  speedSwitch: 10000
+  doubleAcceleration: 10000
+  doubleSpeed: 10000
+  doubleMax: 10000
   Image: {fileID: 0}
   PlayerMoney: 100000
   isPowerUpActive: 0
-  GhostImage: {fileID: 0}
-  JumpImage: {fileID: 0}
 --- !u!82 &6626829217121233043
 AudioSource:
   m_ObjectHideFlags: 0
