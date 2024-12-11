@@ -63,7 +63,7 @@ public class carController : MonoBehaviour
     public GameObject Image;
 
     //Score Count
-    public int PlayerMoney = 10000;
+    public int PlayerMoney = 0;
     public bool isPowerUpActive = false;
 
 
@@ -158,7 +158,7 @@ public class carController : MonoBehaviour
     {
         rigidBody.AddForce(transform.forward * currentAcceleration);
         //Updates Score UI
-        scoreCounter.text = PlayerMoney.ToString("Money:" + PlayerMoney);
+        scoreCounter.text = "Money: " + PlayerMoney.ToString();
 
         //Acceleration Gear Switch
         if (Input.GetAxisRaw("Vertical") > 0)
@@ -284,10 +284,10 @@ public class carController : MonoBehaviour
         }
     }
 
-    public void AddPoints(int pointsToAdd)
+    public void AddPoints(int amount)
     {
-        PlayerMoney += pointsToAdd; // Add the points to the player's total
-        Debug.Log("Player points: " + PlayerMoney);
+        PlayerMoney += amount;  // Add or subtract points (based on the amount)
+        UpdateUI();
     }
 
     //Flips the car
@@ -380,5 +380,10 @@ public class carController : MonoBehaviour
         yield return new WaitForSeconds(10);
         objectives.active = false;
 
+    }
+
+    private void UpdateUI()
+    {
+        scoreCounter.text = "Money: " + PlayerMoney.ToString(); // Update UI text with PlayerMoney value
     }
 }
