@@ -78,14 +78,23 @@ public class carController : MonoBehaviour
     public GameObject JumpImage;
 
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (gameObject.CompareTag ("Breakable"))
+        {
+            PlayerMoney -= 25000;
+            Destroy(other.gameObject);
+        }
+    }
 
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
     {
         // Breakable collisions and randomized value chance for each collision
-        if (collision.gameObject.CompareTag("Breakable"))
+        /*if (collision.gameObject.CompareTag("Breakable"))
         {
+            PlayerMoney -= 25000;
+
             int Value = Random.Range(0, 5);
             if (Value == 0)
             {
@@ -117,10 +126,10 @@ public class carController : MonoBehaviour
             {
                 PlayerMoney -= 6000;
                 Debug.Log("You lose 6000 points");
-            }
+            } 
 
             Destroy(collision.gameObject);
-        }
+        }*/
 
         //Hazard collision
         if (collision.gameObject.tag == "Hazard")
