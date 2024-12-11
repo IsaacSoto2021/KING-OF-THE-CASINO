@@ -22,15 +22,13 @@ public class carController : MonoBehaviour
     public float currentAcceleration = 0f;
     public float currentTurnAngle = 15f;
 
-    public bool goBack = false;
-
     //Car Jump
     public float jumpPower = 100000;
     public bool grounded;
     private Rigidbody rigidBody;
 
     //Random Control
-    private bool mouseControl = false;
+    private bool mouseControl = true;
     public float minSwitchTime = 5f;
     public float maxSwitchTime = 10f;
     public float switchTime;
@@ -65,37 +63,54 @@ public class carController : MonoBehaviour
     public GameObject Image;
 
     //Score Count
-    private int PlayerMoney = 1000000;
+    public int PlayerMoney = 0;
     public bool isPowerUpActive = false;
 
-    //Image
-    public GameObject GhostImage;
-    public GameObject JumpImage;
 
 
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Player loses 25000 whenever they drive through a breakable
-        if (other.CompareTag ("Breakable"))
-        {
-            Destroy(other.gameObject);
-            PlayerMoney -= 25000;
-
-        }
-
-        
-
-
-
-
-
-    }
 
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
     {
+        // Breakable collisions and randomized value chance for each collision
+        if (collision.gameObject.CompareTag("Breakable"))
+        {
+            int Value = Random.Range(0, 5);
+          if (Value == 0)
+            {
+                PlayerMoney -= 1000;
+                Debug.Log("You lose 1000 points");
+            }
+            else if (Value == 1)
+            {
+                PlayerMoney -= 2000;
+                Debug.Log("You lose 2000 points");
+            }
+            else if (Value == 2)
+            {
+                PlayerMoney -= 3000;
+                Debug.Log("You lose 3000 points");
+
+            }
+            else if (Value == 3)
+            {
+                PlayerMoney -= 4000;
+                Debug.Log("You lose 4000 points");
+            }
+            else if (Value == 4)
+            {
+                PlayerMoney -= 5000;
+                Debug.Log("You lose 5000 points");
+            }
+            else if (Value == 5)
+            {
+                PlayerMoney -= 6000;
+                Debug.Log("You lose 6000 points");
+            }
+
+            Destroy(collision.gameObject);
+        }
+
         //Hazard collision
         if (collision.gameObject.tag == "Hazard")
         {
@@ -136,22 +151,17 @@ public class carController : MonoBehaviour
         grounded = true;
         StartCoroutine (ObjectivesVisi());
         Cursor.lockState = CursorLockMode.Locked;
-        rigidBody.centerOfMass = new Vector3(0, 0, 0);
+        rigidBody.centerOfMass = new Vector3(0, -1, 0);
     }
 
     private void FixedUpdate()
     {
         rigidBody.AddForce(transform.forward * currentAcceleration);
         //Updates Score UI
-        scoreCounter.text = PlayerMoney.ToString("Money: " + PlayerMoney);
+        scoreCounter.text = "Money: " + PlayerMoney.ToString();
 
         //Acceleration Gear Switch
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            goBack = !goBack;
-        }
-
-        if (!goBack)
+        if (Input.GetAxisRaw("Vertical") > 0)
         {
             //If there are no hazard effects, acceleration is kept
             if (hazardEffect == false)
@@ -164,8 +174,9 @@ public class carController : MonoBehaviour
             {
                 currentAcceleration = hazardSpeed;
             }
+
         }
-        else
+        else if (Input.GetAxisRaw("Vertical") < 0)
         {
             //If there are no hazard effects, reverse acceleration is kept
             if (hazardEffect == false)
@@ -178,6 +189,10 @@ public class carController : MonoBehaviour
             {
                 currentAcceleration = -hazardSpeed;
             }
+        }
+        else
+        {
+            currentAcceleration = acceleration;
         }
 
         print("Current Acceleration: " + currentAcceleration);
@@ -195,14 +210,14 @@ public class carController : MonoBehaviour
             print("Mouse Time!");
             mouseButtons();
         }
-        else
+        /*else
         {
             print("Keyboard Time!");
             keyboardButtons();
         }
 
         //if the timer runs out, it will switch keybinds
-        /*switchTime -= Time.deltaTime;
+        switchTime -= Time.deltaTime;
         if (switchTime <=0)
         {
             carBreakSFX.Play();
@@ -235,11 +250,11 @@ public class carController : MonoBehaviour
         }
     }
 
-    private void keyboardButtons()
+   /* private void keyboardButtons()
     {
         //take care of steering
         currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
-    }
+    }*/
 
     private void mouseButtons()
     {
@@ -269,10 +284,10 @@ public class carController : MonoBehaviour
         }
     }
 
-    public void AddPoints(int pointsToAdd)
+    public void AddPoints(int amount)
     {
-        PlayerMoney += pointsToAdd; // Add the points to the player's total
-        Debug.Log("Player points: " + PlayerMoney);
+        PlayerMoney += amount;  // Add or subtract points (based on the amount)
+        UpdateUI();
     }
 
     //Flips the car
@@ -337,12 +352,9 @@ public class carController : MonoBehaviour
     {
         Debug.Log("Jump go!");
         rigidBody.AddForce(Vector3.up * jumpPower);
-
-        JumpImage.SetActive(false);
         grounded = false;
         yield return new WaitForSeconds(5f);
         grounded = true;
-        JumpImage.SetActive(true);
     }
 
     //Coroutine for the ghost ability. Sets ghost mode true for short period, dictating what happens in OnCollisionEnter
@@ -355,11 +367,9 @@ public class carController : MonoBehaviour
         GhostActive = false;
         carBody.GetComponent<Renderer>().material.color = Color.green;
         GhostCooldown = true;
-
-        GhostImage.SetActive(false);
         yield return new WaitForSeconds(5);
         GhostCooldown = false;
-        GhostImage.SetActive(true);
+
 
     }
 
@@ -370,5 +380,10 @@ public class carController : MonoBehaviour
         yield return new WaitForSeconds(10);
         objectives.active = false;
 
+    }
+
+    private void UpdateUI()
+    {
+        scoreCounter.text = "Money: " + PlayerMoney.ToString(); // Update UI text with PlayerMoney value
     }
 }

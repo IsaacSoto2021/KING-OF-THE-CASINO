@@ -8,28 +8,30 @@ using UnityEngine;
  */
 public class Test_Slots : MonoBehaviour
 {
-    public int Money = 50000;
+    public int Money = 0;
     public bool isPowerUpActive = false; 
 
     void OnTriggerEnter(Collider other)
     {
-        // Referrencing the player controller
         var ply = other.GetComponent <carController>();
         if (ply == null) return;
 
         // Money Bet = Public int money 
         var Bet = Money;
 
-        //When the Doublepoints is activated
+        // When the Doublepoints is activated, only apply to the reward
+        var finalBet = Bet;
         if (isPowerUpActive)
         {
-            Bet *= 2;
+            finalBet *= 2;
         }
 
         // Negative the bet when inserted from the player
         ply.AddPoints(-Bet);
 
-       // random range of losing 
+        Destroy(gameObject);
+
+        // Random range of losing
         var chance = Random.Range(0, 100);
         if (chance < 75)
         {
@@ -37,10 +39,12 @@ public class Test_Slots : MonoBehaviour
             return;
         }
 
-       //Random range of winning 
-        var RewardScale = Random.Range(1, 100); 
-        ply.AddPoints(Bet * RewardScale); 
+        // Random range of winning
+        var RewardScale = Random.Range(1, 100);
+        ply.AddPoints(finalBet * RewardScale);
         Debug.Log("You are winner, hahaha!");
+
+
     }
 
 }
