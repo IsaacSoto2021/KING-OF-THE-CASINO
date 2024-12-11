@@ -65,7 +65,7 @@ public class carController : MonoBehaviour
     public GameObject Image;
 
     //Score Count
-    public int PlayerMoney = 10000;
+    public int PlayerMoney = 1000000;
     public bool isPowerUpActive = false;
 
     //Image
@@ -79,8 +79,9 @@ public class carController : MonoBehaviour
     {
         if (other.CompareTag ("Breakable"))
         {
-            PlayerMoney -= 25000;
             Destroy(other.gameObject);
+            PlayerMoney -= 25000;
+
         }
     }
 
@@ -142,7 +143,7 @@ public class carController : MonoBehaviour
     {
         rigidBody.AddForce(transform.forward * currentAcceleration);
         //Updates Score UI
-        scoreCounter.text = PlayerMoney.ToString("Money:" + PlayerMoney);
+        scoreCounter.text = PlayerMoney.ToString("Money: " + PlayerMoney);
 
         //Acceleration Gear Switch
         if (Input.GetKeyDown(KeyCode.W))
