@@ -80,56 +80,24 @@ public class carController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (gameObject.CompareTag ("Breakable"))
+        /*if (gameObject.CompareTag ("Breakable"))
         {
             PlayerMoney -= 25000;
             Destroy(other.gameObject);
-        }
+            Debug.Log("Hit");
+        }*/
     }
 
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
     {
         // Breakable collisions and randomized value chance for each collision
-        /*if (collision.gameObject.CompareTag("Breakable"))
+        if (collision.gameObject.CompareTag("Breakable"))
         {
             PlayerMoney -= 25000;
 
-            int Value = Random.Range(0, 5);
-            if (Value == 0)
-            {
-                PlayerMoney -= 1000;
-                Debug.Log("You lose 1000 points");
-            }
-            else if (Value == 1)
-            {
-                PlayerMoney -= 2000;
-                Debug.Log("You lose 2000 points");
-            }
-            else if (Value == 2)
-            {
-                PlayerMoney -= 3000;
-                Debug.Log("You lose 3000 points");
-
-            }
-            else if (Value == 3)
-            {
-                PlayerMoney -= 4000;
-                Debug.Log("You lose 4000 points");
-            }
-            else if (Value == 4)
-            {
-                PlayerMoney -= 5000;
-                Debug.Log("You lose 5000 points");
-            }
-            else if (Value == 5)
-            {
-                PlayerMoney -= 6000;
-                Debug.Log("You lose 6000 points");
-            } 
-
             Destroy(collision.gameObject);
-        }*/
+        }
 
         //Hazard collision
         if (collision.gameObject.tag == "Hazard")
@@ -157,7 +125,7 @@ public class carController : MonoBehaviour
             }
             else if (GhostActive == true)
             {
-                Debug.Log("Enemy Pass Through");
+               // Debug.Log("Enemy Pass Through");
             }
         }
 
@@ -191,7 +159,7 @@ public class carController : MonoBehaviour
             //If there are no hazard effects, acceleration is kept
             if (hazardEffect == false)
             {
-                print("Go Forward");
+               // print("Go Forward");
                 currentAcceleration = Mathf.MoveTowards(currentAcceleration, acceleration, carSpeed * Time.deltaTime);
             }
             //else acceleration is hazard speed
@@ -205,7 +173,7 @@ public class carController : MonoBehaviour
             //If there are no hazard effects, reverse acceleration is kept
             if (hazardEffect == false)
             {
-                print("Go Backward");
+              //  print("Go Backward");
                 currentAcceleration = Mathf.MoveTowards(currentAcceleration, -acceleration, carSpeed * Time.deltaTime);
             }
             //else reverse acceleration is hazard reverse speed
@@ -234,12 +202,12 @@ public class carController : MonoBehaviour
         //If mouse control is true, the player will use the mouse, else they use the keyboard
         if (mouseControl)
         {
-            print("Mouse Time!");
+           // print("Mouse Time!");
             mouseButtons();
         }
         else
         {
-            print("Keyboard Time!");
+           // print("Keyboard Time!");
             keyboardButtons();
         }
 
