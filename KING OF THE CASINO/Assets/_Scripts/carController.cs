@@ -22,13 +22,15 @@ public class carController : MonoBehaviour
     public float currentAcceleration = 0f;
     public float currentTurnAngle = 15f;
 
+    public bool goBack = false;
+
     //Car Jump
     public float jumpPower = 100000;
     public bool grounded;
     private Rigidbody rigidBody;
 
     //Random Control
-    private bool mouseControl = true;
+    private bool mouseControl = false;
     public float minSwitchTime = 5f;
     public float maxSwitchTime = 10f;
     public float switchTime;
@@ -133,7 +135,7 @@ public class carController : MonoBehaviour
         grounded = true;
         StartCoroutine (ObjectivesVisi());
         Cursor.lockState = CursorLockMode.Locked;
-        rigidBody.centerOfMass = new Vector3(0, -1, 0);
+        rigidBody.centerOfMass = new Vector3(0, 0, 0);
     }
 
     private void FixedUpdate()
@@ -143,7 +145,12 @@ public class carController : MonoBehaviour
         scoreCounter.text = PlayerMoney.ToString("Money:" + PlayerMoney);
 
         //Acceleration Gear Switch
-        if (Input.GetAxisRaw("Vertical") > 0)
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            goBack = !goBack;
+        }
+
+        if (!goBack)
         {
             //If there are no hazard effects, acceleration is kept
             if (hazardEffect == false)
@@ -156,9 +163,8 @@ public class carController : MonoBehaviour
             {
                 currentAcceleration = hazardSpeed;
             }
-
         }
-        else if (Input.GetAxisRaw("Vertical") < 0)
+        else
         {
             //If there are no hazard effects, reverse acceleration is kept
             if (hazardEffect == false)
@@ -171,10 +177,6 @@ public class carController : MonoBehaviour
             {
                 currentAcceleration = -hazardSpeed;
             }
-        }
-        else
-        {
-            currentAcceleration = acceleration;
         }
 
         print("Current Acceleration: " + currentAcceleration);
@@ -192,14 +194,14 @@ public class carController : MonoBehaviour
             print("Mouse Time!");
             mouseButtons();
         }
-        /*else
+        else
         {
             print("Keyboard Time!");
             keyboardButtons();
         }
 
         //if the timer runs out, it will switch keybinds
-        switchTime -= Time.deltaTime;
+        /*switchTime -= Time.deltaTime;
         if (switchTime <=0)
         {
             carBreakSFX.Play();
@@ -232,11 +234,11 @@ public class carController : MonoBehaviour
         }
     }
 
-   /* private void keyboardButtons()
+    private void keyboardButtons()
     {
         //take care of steering
         currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
-    }*/
+    }
 
     private void mouseButtons()
     {
