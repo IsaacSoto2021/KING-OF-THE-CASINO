@@ -65,7 +65,7 @@ public class carController : MonoBehaviour
     public GameObject Image;
 
     //Score Count
-    public int PlayerMoney = 1000000;
+    private int PlayerMoney = 1000000;
     public bool isPowerUpActive = false;
 
     //Image
@@ -84,6 +84,13 @@ public class carController : MonoBehaviour
             PlayerMoney -= 25000;
 
         }
+
+        
+
+
+
+
+
     }
 
     //Collision Handler, all collision based interactions will be handled here

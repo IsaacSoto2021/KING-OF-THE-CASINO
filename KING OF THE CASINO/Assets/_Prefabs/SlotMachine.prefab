@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1353724424200479672}
   - component: {fileID: 3310577244197574362}
   - component: {fileID: 8708359942535758650}
-  - component: {fileID: 3928928424955518490}
+  - component: {fileID: 7656858059346876250}
   m_Layer: 0
   m_Name: SlotMachine
   m_TagString: SlotMachine
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.0000007, y: 5.1685476, z: 3.0000007}
   m_Center: {x: 0.5000001, y: 2.5842738, z: 0.5804211}
---- !u!114 &3928928424955518490
+--- !u!114 &7656858059346876250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,8 +115,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8083171474503321254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6550860303c54d04aaef83a08525133c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b3e839c8a45ae24ab7986ba7205bc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: 1000
+  Money: 50000
   isPowerUpActive: 0
