@@ -14,13 +14,19 @@ public class carController : MonoBehaviour
 
     //Car Controller
     public float acceleration = 1000f;
+    public float carSpeed = 1000f;
+    public float maxSpeed = 1000f;
+
     public AudioSource carBreakSFX;
 
     public float breakingForce = 1000f;
+    public float currentBreakingForce = 0f;
     public float maxTurnAngle = 15f;
 
     public float currentAcceleration = 0f;
     public float currentTurnAngle = 15f;
+
+    public bool goBack;
 
     //Car Jump
     public float jumpPower = 100000;
@@ -28,7 +34,7 @@ public class carController : MonoBehaviour
     private Rigidbody rigidBody;
 
     //Random Control
-    private bool mouseControl = true;
+    private bool mouseControl = false;
     public float minSwitchTime = 5f;
     public float maxSwitchTime = 10f;
     public float switchTime;
@@ -57,7 +63,9 @@ public class carController : MonoBehaviour
     [SerializeField] Text scoreCounter;
 
     //Speed Boost
-    public float speedSwitch = 10000f;
+    public float doubleAcceleration = 10000f;
+    public float doubleSpeed = 10000f;
+    public float doubleMax = 10000f;
 
     //Image
     public GameObject Image;
@@ -151,7 +159,7 @@ public class carController : MonoBehaviour
         grounded = true;
         StartCoroutine (ObjectivesVisi());
         Cursor.lockState = CursorLockMode.Locked;
-        rigidBody.centerOfMass = new Vector3(0, -1, 0);
+        rigidBody.centerOfMass = new Vector3(0, 0, 0);
     }
 
     private void FixedUpdate()
@@ -161,38 +169,45 @@ public class carController : MonoBehaviour
         scoreCounter.text = "Money: " + PlayerMoney.ToString();
 
         //Acceleration Gear Switch
-        if (Input.GetAxisRaw("Vertical") > 0)
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            goBack = !goBack;
+        }
+ 
+        if (!goBack)
         {
             //If there are no hazard effects, acceleration is kept
             if (hazardEffect == false)
             {
                 print("Go Forward");
-                currentAcceleration = acceleration;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, acceleration, carSpeed * Time.deltaTime);
             }
             //else acceleration is hazard speed
             else
             {
-                currentAcceleration = hazardSpeed;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, hazardSpeed, carSpeed * Time.deltaTime);
             }
-
         }
-        else if (Input.GetAxisRaw("Vertical") < 0)
+        else
         {
             //If there are no hazard effects, reverse acceleration is kept
             if (hazardEffect == false)
             {
                 print("Go Backward");
-                currentAcceleration = -acceleration;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, -acceleration, carSpeed * Time.deltaTime);
             }
             //else reverse acceleration is hazard reverse speed
             else
             {
-                currentAcceleration = -hazardSpeed;
+                currentAcceleration = Mathf.MoveTowards(currentAcceleration, hazardSpeed, carSpeed * Time.deltaTime);
             }
         }
-        else
+
+        // Limit the speed
+        float currentSpeed = rigidBody.velocity.magnitude;
+        if (currentSpeed > maxSpeed)
         {
-            currentAcceleration = acceleration;
+            currentAcceleration = 0f; // Stop accelerating if max speed is reached
         }
 
         print("Current Acceleration: " + currentAcceleration);
@@ -210,14 +225,14 @@ public class carController : MonoBehaviour
             print("Mouse Time!");
             mouseButtons();
         }
-        /*else
+        else
         {
             print("Keyboard Time!");
             keyboardButtons();
         }
 
         //if the timer runs out, it will switch keybinds
-        switchTime -= Time.deltaTime;
+        /*switchTime -= Time.deltaTime;
         if (switchTime <=0)
         {
             carBreakSFX.Play();
@@ -233,6 +248,12 @@ public class carController : MonoBehaviour
         //apply sterring to front wheels
         frontLeft.steerAngle = currentTurnAngle;
         frontRight.steerAngle = currentTurnAngle;
+
+        //apply breakforce to four wheels
+        frontLeft.brakeTorque = currentBreakingForce;
+        frontRight.brakeTorque = currentBreakingForce;
+        backLeft.brakeTorque = currentBreakingForce;
+        backRight.brakeTorque = currentBreakingForce;
 
         detectUpsideDown();
 
@@ -250,11 +271,11 @@ public class carController : MonoBehaviour
         }
     }
 
-   /* private void keyboardButtons()
+    private void keyboardButtons()
     {
         //take care of steering
         currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
-    }*/
+    }
 
     private void mouseButtons()
     {
@@ -318,13 +339,24 @@ public class carController : MonoBehaviour
         hazardEffect = false;
     }
 
+    public IEnumerator carBrake()
+    {
+        currentBreakingForce = breakingForce;
+        yield return new WaitForSeconds(3);
+        currentBreakingForce = 0f;
+    }
+
     public IEnumerator speedBoost()
     {
         ShowImage();
         Debug.Log("Boost On");
-        currentAcceleration = speedSwitch;
+        currentAcceleration = doubleAcceleration;
+        carSpeed = doubleSpeed;
+        maxSpeed = doubleMax;
         yield return new WaitForSeconds(5f);
         currentAcceleration = acceleration;
+        carSpeed = 1000f;
+        maxSpeed = 1000f;
         Debug.Log("Boost Off");
     }
 
