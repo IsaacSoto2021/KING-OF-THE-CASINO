@@ -77,6 +77,7 @@ public class carController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Player loses 25000 whenever they drive through a breakable
         if (other.CompareTag ("Breakable"))
         {
             Destroy(other.gameObject);
@@ -88,14 +89,6 @@ public class carController : MonoBehaviour
     //Collision Handler, all collision based interactions will be handled here
     private void OnCollisionEnter(Collision collision)
     {
-        // Breakable collisions and randomized value chance for each collision
-      //  if (collision.gameObject.CompareTag("Breakable"))
-        {
-      //      PlayerMoney -= 25000;
-
-       //     Destroy(collision.gameObject);
-        }
-
         //Hazard collision
         if (collision.gameObject.tag == "Hazard")
         {
